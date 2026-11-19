@@ -80,6 +80,6 @@
       "configFile": "lakefile.lean"
     }
   ],
-  "name": "weak-goldbach-formalization",
+  "name": "weakGoldbach",
   "lakeDir": ".lake"
 }
