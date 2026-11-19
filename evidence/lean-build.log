@@ -1,0 +1,6 @@
+warning: proofwidgets: wanted prebuilt release, but could not find an associated tag for the package's revision
+[1464/1468] Building WeakGoldbach.Foundations
+[1465/1468] Building WeakGoldbach.FiniteCertificate
+[1465/1468] Building WeakGoldbach.Targets
+[1467/1468] Building WeakGoldbach
+LEAN_BUILD_EXIT_CODE=0

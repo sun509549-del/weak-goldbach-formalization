@@ -39,7 +39,8 @@ theorem norm_expSum_le_card (N : ℕ) (α : ℝ) :
   calc
     ‖expSum N α‖ ≤ ∑ p in primesBelow N,
         ‖phase (2 * Real.pi * (p : ℝ) * α)‖ := norm_sum_le _ _
-    _ = ((primesBelow N).card : ℝ) := by simp [norm_phase]
+    _ = ((primesBelow N).card : ℝ) := by
+      simp only [norm_phase, Finset.sum_const, nsmul_eq_mul, mul_one]
 
 /-- A coarser bound that does not use a prime-counting estimate. -/
 theorem norm_expSum_le (N : ℕ) (α : ℝ) : ‖expSum N α‖ ≤ (N : ℝ) := by

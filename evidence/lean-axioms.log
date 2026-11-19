@@ -1,0 +1,7 @@
+'WeakGoldbach.norm_expSum_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WeakGoldbach.norm_expSum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WeakGoldbach.majorArc_union_minorArc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WeakGoldbach.majorArc_inter_minorArc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WeakGoldbach.weakGoldbach_upTo101' depends on axioms: [propext, Quot.sound, Classical.choice]
+'WeakGoldbach.finite_tail_splice' depends on axioms: [propext]
+LEAN_AUDIT_EXIT_CODE=0
