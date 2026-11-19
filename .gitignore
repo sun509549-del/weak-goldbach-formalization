@@ -1,0 +1,12 @@
+.lake/
+lake-packages/
+build/
+*.olean
+*.ilean
+*.exe
+*.o
+*.obj
+__pycache__/
+cpp/*.csv
+!cpp/witnesses_10001.csv
+*.zip

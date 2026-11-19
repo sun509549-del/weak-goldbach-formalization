@@ -1,0 +1,16 @@
+scope=finite_fixed_3_prime_witness_search
+lower=7
+upper=1000000
+mode=avx2
+avx2_available=true
+primes_up_to_limit=78498
+checked_odds=499997
+found_witnesses=499997
+first_failure=0
+witness_checksum=6535821832762130111
+scalar_sieve_ms=3.631
+search_ms=3.401
+cross_check=PASS
+other_search_ms=3.065
+result=PASS
+exit_code=0

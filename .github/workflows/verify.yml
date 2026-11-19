@@ -1,0 +1,42 @@
+name: Verify
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official Lean toolchain manager
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore pinned Mathlib imports
+        run: lake exe cache get Mathlib/Data/Nat/Prime.lean Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean Mathlib/Analysis/SpecialFunctions/Log/Basic.lean
+      - name: Reject proof placeholders
+        run: python3 scripts/check_proofs.py
+      - name: Compile proofs and inspect axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build
+          lake env lean scripts/Audit.lean | tee /tmp/lean-axioms.log
+          if grep -E 'sorryAx|Lean.ofReduceBool' /tmp/lean-axioms.log; then
+            exit 1
+          fi
+  finite-verifier:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with warnings
+        run: g++ -O3 -std=c++17 -Wall -Wextra -Wpedantic -Werror cpp/verify.cpp -o cpp/verify
+      - name: Independent small interval and boundary checks
+        run: python3 cpp/check.py cpp/verify
+      - name: Verify million interval
+        run: ./cpp/verify --limit 1000000 --mode auto --cross-check
